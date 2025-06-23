@@ -11,6 +11,13 @@
             <form method="POST" action="/categories/save">
                 <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo"><br>
                 <textarea  class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea><br>
+                <label>Categoria</label>
+                <select name="category" class="form-control">
+                    <% categories.forEach((category) => { %>
+                        <option value="<%=category.id %>"><%= category.title %></option>
+                    <% }) %>
+                </select>
+                <br>
                 <button class=" btn btn-dark">Cadastrar</button>
             </form>
         </div>
@@ -24,6 +31,7 @@
 <script>
 
     tinymce.init({
+        language: 'pt_BR',
         selector: "#article",
         plugins: [
             'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
