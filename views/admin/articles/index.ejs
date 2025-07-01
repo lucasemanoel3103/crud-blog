@@ -12,7 +12,7 @@ include('../../partials/navbar.ejs') %>
         <th>ID</th>
         <th>Título</th>
         <th>Slug</th>
-        <th>Category</th>
+        <th>Categorias</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -22,8 +22,19 @@ include('../../partials/navbar.ejs') %>
             <td><%= article.id %></td>
             <td><%= article.title %></td>
             <td><%= article.slug %></td>
-            <td><%= article.categoryId %></td>
-            <td>Ações</td>
+            <td><%= article.category.title %></td>
+            <td>
+
+                <form
+                    method="POST"
+                    action="/articles/delete"
+                    style="display: inline"
+                    onsubmit="confirmDelete(event, this)">
+                    <input type="hidden" name="id" value="<%= article.id %>" />
+                    <button class="btn btn-danger">Deletar</button>
+                </form>
+
+            </td>
         </tr>
        <% }) %>
     </tbody>
@@ -34,7 +45,7 @@ include('../../partials/navbar.ejs') %>
 <script>
   function confirmDelete(event, form) {
     event.preventDefault();
-    let decision = confirm("Você tem certeza que quer deletar essa categoria?");
+    let decision = confirm("Você tem certeza que quer deletar esse artigo?");
     if (decision) {
       form.submit();
     } 
